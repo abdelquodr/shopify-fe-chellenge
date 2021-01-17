@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './components/Navbar'
+import { connect } from 'react-redux'
+import MovieList from './components/MovieList';
+import './App.css'
 
-function App() {
+
+
+function App({ dispatch }) {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="body">
+        <Navbar dispatch={dispatch} />
+        {/* <h3 style={{ marginTop: "20%" }} className="text-dark"> Mayorwa </h3> */}
+        <div style={{ marginTop: '10%' }}>
+          <div className="container">
+            <div className="row">
+              <MovieList />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div >
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  loading: state.loading,
+  post: state.post,
+  err: state.err
+})
+
+
+export default connect(mapStateToProps)(App);
